@@ -28,8 +28,10 @@ class Policy:
 
         if self.use_lstm:
             action, self.state, _ = self.policy.compute_single_action(obs=obs, state=self.state, explore=explore)
+
         else:
-            action = self.policy.compute_single_action(obs=obs, explore=explore)
+            action, _, _ = self.policy.compute_single_action(obs=obs, explore=explore)
 
         action = space_utils.unsquash_action(action, self.policy.action_space_struct)
+
         return action

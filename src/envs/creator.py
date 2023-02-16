@@ -7,4 +7,8 @@ def env_creator(env_config):
     return gym.make('Platform-v0')
 
 
-register_env('Platform-v0', env_creator)
+def register_platform_env(env_name):
+    register_env(env_name, env_creator)
+
+
+#register_env("Platform-v0", env_creator)

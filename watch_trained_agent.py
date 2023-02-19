@@ -11,6 +11,7 @@ args = parser.parse_args()
 
 
 def visualize_episodes():
+    """ Calls an evaluator with render=True using the parsed arguments"""
     env_kwargs = dict(env_config='')
     tmp_env = env_creator(**env_kwargs)
     policy_kwargs = dict(checkpoint_path=args.CHECKPOINT_PATH, obs_space=tmp_env.observation_space)

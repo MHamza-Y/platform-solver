@@ -6,7 +6,9 @@ from ray.rllib.utils.spaces.repeated import Repeated
 
 
 def _get_preprocessor(space: gym.Space) -> type:
-    """Returns an appropriate preprocessor class for the given space."""
+    """ This is modification of the ray.rllib.models.preprocessors.get_preprocessor
+    Returns NoPreprocessor instead of OneHotPreprocessor for categorical object
+    """
 
     _legacy_patch_shapes(space)
     obs_shape = space.shape

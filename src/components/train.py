@@ -3,6 +3,16 @@ from ray import air, tune
 
 def train_env(algo, config, log_dir, iterations, stop_reward_mean,
               name):
+    """
+    Wrapper for the ray.tune.Tuner.fit function used for training an agent on the given environment
+    :param algo: The algorithm to use for training
+    :param config: The algorithm configs
+    :param log_dir: Where to save logs and the checkpoints
+    :param iterations: Number of iterations to train for
+    :param stop_reward_mean: If this mean reward is achieved before all the iterations are done, the training is stopped
+    :param name: name of the training to group the logs
+    :return: the results object returned by the ray.tune.Tuner.fit
+    """
     tuner = tune.Tuner(
         algo,
         param_space=config,

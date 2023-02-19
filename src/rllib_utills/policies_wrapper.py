@@ -8,8 +8,16 @@ from src.rllib_utills.configs import get_checkpoint_configs
 
 
 class Policy:
+    """ Easy to use RlLib policy wrapper
+    Also this class allow the user to compute actions on the saved policy without restoring the whole experiment
+    """
 
     def __init__(self, checkpoint_path, obs_space):
+        """
+        loads the policy and the pre-processor for the observations
+        :param checkpoint_path:
+        :param obs_space:
+        """
         configs = get_checkpoint_configs(checkpoint_path)
         policy_path = join(checkpoint_path, 'policies', 'default_policy')
         self.policy = RLLibPolicy.from_checkpoint(policy_path)
@@ -20,7 +28,12 @@ class Policy:
         self.preprocessor = get_preprocessor(obs_space)(obs_space)
 
     def __call__(self, obs, explore=False):
-
+        """
+        Computes the action for a given observed state
+        :param obs: the observed state
+        :param explore: if turned on a action is sampled from the policy instead of returning the best action
+        :return: the action returned by the policy
+        """
         obs = self.preprocessor.transform(obs)
 
         if self.use_lstm:

@@ -4,6 +4,14 @@ from src.base_rl.trajectory import Trajectory
 
 
 @ray.remote
+class EvaluationActor:
+    def __init__(self, **kwargs):
+        self.evaluator = Evaluator(**kwargs)
+
+    def evaluate(self, **kwargs):
+        return self.evaluator.evaluate(**kwargs)
+
+
 class Evaluator:
 
     def __init__(self, env_creator, env_kwargs, policy_class, policy_kwargs):
